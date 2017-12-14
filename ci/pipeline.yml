@@ -1,6 +1,6 @@
 ---
 resources:
-- name: attendee-service-source
+- name: pcf-attendee-service-code
   type: git
   source:
     uri: https://github.com/PrasanthMohanCognizant/pcf-attendee-service-code
@@ -20,28 +20,28 @@ jobs:
 - name: test
   public: true
   plan:
-  - get: attendee-service-source
+  - get: pcf-attendee-service-code
     trigger: true
   - task: test
-    file: attendee-service-source/ci/tasks/test.yml
+    file: pcf-attendee-service-code/ci/tasks/test.yml
 
 - name: deploy
   public: true
   plan:
-  - get: attendee-service-source
+  - get: pcf-attendee-service-code
     trigger: true
     passed: [test]
   - task: package
     file: pcf-attendee-service-code/ci/tasks/package.yml
   - put: deploy-attendee-service
     params:
-      manifest: attendee-service/manifest.yml
+      manifest: pcf-attendee-service-code/manifest.yml
       path: package-output/attendee-service.jar
 
 - name: smoke_test
   public: true
   plan:
-  - get: attendee-service-source
+  - get: pcf-attendee-service-code
     trigger: true
     passed: [deploy]
   - task: smoke_test
