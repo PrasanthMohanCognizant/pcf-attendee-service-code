@@ -48,3 +48,4 @@ jobs:
     file: pcf-attendee-service-code/ci/tasks/smoke-test.yml
     params:
       ATTENDEE_SERVICE_URL: attendee-service-dasyuroid-linalool.apps.cumuluslabs.io
+
